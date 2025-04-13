@@ -13,6 +13,9 @@ connectButton.onclick = async () => {
     filters: [{ vendorId: 0x1A86 }]
   });
 
+  console.log(device.productName);      // "Arduino Micro"
+  console.log(device.manufacturerName); // "Arduino LLC"
+  
   await device.open();
   await device.selectConfiguration(1);
   await device.claimInterface(0);
