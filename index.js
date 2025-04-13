@@ -21,16 +21,4 @@ connectButton.onclick = async () => {
   connectButton.style.display = "none";
   disconnectButton.style.display = "initial";
   listen();
-
-
-
-
-
-
-disconnectButton.onclick = async () => {
-  await device.close();
-
-  connected.style.display = "none";
-  connectButton.style.display = "initial";
-  disconnectButton.style.display = "none";
 };
