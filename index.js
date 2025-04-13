@@ -21,7 +21,7 @@ connectButton.onclick = async () => {
   connectButton.style.display = "none";
   disconnectButton.style.display = "initial";
   listen();
-};
+
 
 
 
