@@ -9,18 +9,19 @@ const deviceButtonPressed = document.getElementById("deviceButtonPressed");
 
 let device;
 connectButton.onclick = async () => {
-  device = navigator.usb.requestDevice({ filters: [{ vendorId: 0x1A86 }] })
-.then(device => {
-  console.log(device.productName);      // "Arduino Micro"
-  console.log(device.manufacturerName); // "Arduino LLC"
-})
-.catch(error => { console.error(error); });
+  device = await navigator.usb.requestDevice({
+    filters: [{ vendorId: 0x1A86 }]
+  });
 
+  await device.open();
+  await device.selectConfiguration(1);
+  await device.claimInterface(0);
 
-
-
-  
-  
+  connected.style.display = "block";
+  connectButton.style.display = "none";
+  disconnectButton.style.display = "initial";
+  listen();
+};
 
 
 
