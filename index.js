@@ -16,7 +16,9 @@ connectButton.onclick = async () => {
   await device.open();
   await device.selectConfiguration(1);
   await device.claimInterface(0);
-
+  
+console.log(device.productName); // "Arduino Micro"
+    console.log(device.manufacturerName);
   connected.style.display = "block";
   connectButton.style.display = "none";
   disconnectButton.style.display = "initial";
