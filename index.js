@@ -11,7 +11,7 @@ let device;
 connectButton.onclick = async () => {
   device = await navigator.usb.requestDevice({
     filters: [{ vendorId: 0x1A86 }]
-  })..then(device => {
+  }).then(device => {
   console.log(device.productName);      // "Arduino Micro"
   console.log(device.manufacturerName); // "Arduino LLC"
 })
