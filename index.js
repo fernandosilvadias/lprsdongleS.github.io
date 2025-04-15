@@ -10,23 +10,25 @@ const deviceButtonPressed = document.getElementById("deviceButtonPressed");
 let device;
 connectButton.onclick = async () => {
   device = await 
-navigator.usb.requestDevice({ filters: [{ vendorId: 0x1A86 }] })
-.then(selectedDevice => {
-    device = selectedDevice;
-    return device.open(); // Begin a session.
+navigator.usb
+  .requestDevice({ filters: [{ vendorId: 0x1A86 }] })
+  .then((device) => {
+    console.log(device.productName); // "Arduino Micro"
+    console.log(device.manufacturerName); // "Arduino LLC"
   })
-.then(() => device.selectConfiguration(1)) // Select configuration #1 for the device.
-.then(() => device.claimInterface(2)) // Request exclusive control over interface #2.
-.then(() => device.controlTransferOut({
-    requestType: 'class',
-    recipient: 'interface',
-    request: 0x22,
-    value: 0x01,
-    index: 0x02})) // Ready to receive data
-.then(() => device.transferIn(5, 64)) // Waiting for 64 bytes of data from endpoint #5.
-.then(result => {
-  const decoder = new TextDecoder();
-  console.log('Received: ' + decoder.decode(result.data));
-})
-.catch(error => { console.error(error); });
+  .catch((error) => {
+    console.error(error);
+  });
+  device.addEventListener("inputreport", event => {
+  const { data, device, reportId } = event;
+
+  // Handle only the Joy-Con Right device and a specific report ID.
+  if (device.productId !== 0x2007 && reportId !== 0x3f) return;
+
+  const value = data.getUint8(0);
+  if (value === 0) return;
+
+  const someButtons = { 1: "A", 2: "X", 4: "B", 8: "Y" };
+  console.log(`User pressed button ${someButtons[value]}.`);
+});
 }
