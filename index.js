@@ -19,3 +19,4 @@ navigator.usb
   .catch((error) => {
     console.error(error);
   });
+}
