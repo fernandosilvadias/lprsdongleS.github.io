@@ -29,5 +29,5 @@ navigator.usb.requestDevice({ filters: [{ vendorId: 0x1A86 }] })
   console.log('Received: ' + decoder.decode(result.data));
 })
 .catch(error => { console.error(error); });
-Keep in mind that the WebUSB library I'm using is just implem
+
 }
