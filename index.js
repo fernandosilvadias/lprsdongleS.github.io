@@ -27,7 +27,6 @@ navigator.usb
 
   const value = data.getUint8(0);
   if (value === 0) return;
-
   const someButtons = { 1: "A", 2: "X", 4: "B", 8: "Y" };
   console.log(`User pressed button ${someButtons[value]}.`);
 });
