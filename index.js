@@ -19,6 +19,7 @@ navigator.usb
   .catch((error) => {
     console.error(error);
   });
+  await device.open();
   device.addEventListener('inputreport', event => {
   const { data, device, reportId } = event;
 
