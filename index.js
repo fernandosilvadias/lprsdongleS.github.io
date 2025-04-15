@@ -19,7 +19,7 @@ navigator.usb
   .catch((error) => {
     console.error(error);
   });
-  device.addEventListener("inputreport", event => {
+  device.addEventListener('inputreport', event => {
   const { data, device, reportId } = event;
 
   // Handle only the Joy-Con Right device and a specific report ID.
